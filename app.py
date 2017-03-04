@@ -23,8 +23,9 @@ manager = Manager(app)
 
 def configure_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-    app.secret_key = 'secret key'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(db_path)
+    import config
+    app.secret_key = config.secret_key
+    app.config['SQLALCHEMY_DATABASE_URI'] = config.db_uri
     db.init_app(app)
     app.register_blueprint(routes_todo, url_prefix='/todo')
 
